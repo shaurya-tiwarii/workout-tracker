@@ -2,6 +2,7 @@ package com.example.workouttracker;
 import android.content.Context; import android.database.Cursor; import android.database.sqlite.SQLiteDatabase; import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat; import java.util.Date; import java.util.Locale;
 
+// local sqlite helper
 public class DBHelper extends SQLiteOpenHelper {
  DBHelper(Context c){super(c,"workouts.db",null,1);}
  public void onCreate(SQLiteDatabase d){d.execSQL("CREATE TABLE workouts(id INTEGER PRIMARY KEY AUTOINCREMENT,exercise TEXT,sets TEXT,reps TEXT,weight TEXT,date TEXT)");}
