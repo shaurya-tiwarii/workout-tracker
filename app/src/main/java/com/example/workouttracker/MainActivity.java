@@ -8,6 +8,7 @@ public class MainActivity extends Activity {
  findViewById(R.id.save).setOnClickListener(v->save()); refresh();}
  void save(){if(exercise.getText().length()==0){exercise.setError("Required");return;}db.insert(exercise.getText().toString(),sets.getText().toString(),reps.getText().toString(),weight.getText().toString()); Toast.makeText(this,"Workout saved",Toast.LENGTH_SHORT).show();exercise.setText("");sets.setText("");reps.setText("");weight.setText("");refresh();}
  void refresh(){Cursor c=db.all();StringBuilder s=new StringBuilder("Workout History\n\n");while(c.moveToNext())s.append(c.getString(1)).append(" - ").append(c.getString(2)).append(" sets x ").append(c.getString(3)).append(" reps @ ").append(c.getString(4)).append(" kg\n").append(c.getString(5)).append("\n\n");history.setText(s.toString());c.close();}
+ // on-device db
  static class DB extends SQLiteOpenHelper{
   DB(Context c){super(c,"workouts.db",null,1);} public void onCreate(SQLiteDatabase d){d.execSQL("CREATE TABLE workouts(id INTEGER PRIMARY KEY AUTOINCREMENT,exercise TEXT,sets TEXT,reps TEXT,weight TEXT,date TEXT)");}
   public void onUpgrade(SQLiteDatabase d,int o,int n){d.execSQL("DROP TABLE IF EXISTS workouts");onCreate(d);}
